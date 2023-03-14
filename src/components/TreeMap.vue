@@ -1,8 +1,8 @@
 <template>
   <svg :width='length' :height='length'>
-    <rect v-for="(d, i) in leaves" class="rect" :transform="`translate(${d.x0},${d.y0})`" :width="d.x1 - d.x0"
+    <rect v-for="(d, i) in leaves" :transform="`translate(${d.x0},${d.y0})`" :width="d.x1 - d.x0"
       :height="d.y1 - d.y0" :fill="colorScale(d.data[0])" stroke="white" stroke-width="0.5"></rect>
-    <text v-for="(d, i) in leaves" class="text" :x="d.x0 + 3" :y="d.y0 + 15" font-size="14" font-weight="700"
+    <text v-for="(d, i) in leaves" :x="d.x0 + 3" :y="d.y0 + 15"
       fill="black">{{`${d.data[0]}: ${d.value}`}}</text>
   </svg>
 </template>
@@ -40,7 +40,7 @@ export default {
         .round(true)
         .size([this.length, this.length])
         .tile(d3.treemapResquarify.ratio(2));
-      return treemap(hierarchyData).leaves().sort(function (a, b) { return b.data[0] - a.data[0]; });
+      return treemap(hierarchyData).leaves().sort((a, b) => b.data[0] - a.data[0]);
     }
 
   },
@@ -58,7 +58,9 @@ export default {
 </script>
 
 <style lang="css">
-  .text {
+  text {
+    font-size:14px;
+    font-weight:700;
     paint-order: stroke;
     stroke: white;
     stroke-width: 2px;
